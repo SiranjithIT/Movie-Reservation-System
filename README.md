@@ -33,7 +33,7 @@ cd path/to/Movie-Reservation-System
 
 ### 4. 🛠️ Build the Project
 
-Build the Maven project while skipping tests:
+Build the Maven project while skipping tests(make sure that proper maven file is downloaded(https://maven.apache.org/download.cgi) and placed in proper program file):
 
 ```bash
 mvn clean package -DskipTests
