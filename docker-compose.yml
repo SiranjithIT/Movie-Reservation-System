@@ -23,6 +23,15 @@ services:
     networks:
       - backend
 
+  show-service:
+    build: ./show-service
+    container_name: show-service
+    depends_on:
+      - mysql
+    ports:
+      - "8082:8082"
+    networks:
+      - backend
 
 networks:
   backend:

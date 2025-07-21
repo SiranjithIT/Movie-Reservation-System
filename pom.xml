@@ -15,6 +15,7 @@
     <modules>
         <module>common-dto</module>
         <module>movie-service</module>
+        <module>show-service</module>
     </modules>
 
     <properties>
@@ -24,7 +25,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- Import Spring Boot BOM -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
