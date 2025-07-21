@@ -9,7 +9,7 @@ Follow the steps below to clone and run the Movie Reservation System using Docke
 Clone the repository to your local machine:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/SiranjithIT/Movie-Reservation-System.git
 ```
 
 ---
