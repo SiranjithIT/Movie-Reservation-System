@@ -33,6 +33,16 @@ services:
     networks:
       - backend
 
+  reservation-service:
+    build: ./reservation-service
+    container_name: reservation-service
+    depends_on:
+      - mysql
+    ports:
+      - "8083:8083"
+    networks:
+      - backend
+
 networks:
   backend:
     driver: bridge

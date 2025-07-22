@@ -16,6 +16,7 @@
         <module>common-dto</module>
         <module>movie-service</module>
         <module>show-service</module>
+        <module>reservation-service</module>
     </modules>
 
     <properties>
