@@ -43,6 +43,16 @@ services:
     networks:
       - backend
 
+  user-service:
+    build: ./user-service
+    container_name: user-service
+    depends_on:
+      - mysql
+    ports:
+      - "8084:8084"
+    networks:
+      - backend
+
 networks:
   backend:
     driver: bridge
