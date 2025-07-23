@@ -18,15 +18,27 @@ public class Reservation {
     private String slotKey;
 
     @Column(nullable = false)
+    private String seatNum;
+
+    @Column(nullable = false)
     private UUID userId;
 
     public Reservation() {
     }
 
-    public Reservation(LocalDate date, String slotKey, UUID userId) {
+    public Reservation(LocalDate date, String slotKey, UUID userId, String seatNum) {
         this.date = date;
         this.slotKey = slotKey;
         this.userId = userId;
+        this.seatNum = seatNum;
+    }
+
+    public String getSeatNum() {
+        return seatNum;
+    }
+
+    public void setSeatNum(String seatNum) {
+        this.seatNum = seatNum;
     }
 
     public UUID getId() {

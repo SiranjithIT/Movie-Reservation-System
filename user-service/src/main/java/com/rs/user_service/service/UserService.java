@@ -1,12 +1,14 @@
 package com.rs.user_service.service;
 
 import com.rs.user_service.dto.UserDto;
+import com.rs.user_service.dto.UserRequest;
 import com.rs.user_service.model.User;
 import com.rs.user_service.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -41,4 +43,14 @@ public class UserService {
         }
     }
 
+    public UserDto authenticateUser(UserRequest userRequest){
+        Optional<User> userOpt = userRepo.findByUserName(userRequest.getUsername());
+        if(userOpt.isPresent()){
+            User user = userOpt.get();
+            if(user.getPassword().equals(userRequest.getPassword())){
+                return ConvertToDTO(user);
+            }
+        }
+        throw new RuntimeException("User not found");
+    }
 }

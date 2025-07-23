@@ -1,6 +1,7 @@
 package com.rs.user_service.controller;
 
 import com.rs.user_service.dto.UserDto;
+import com.rs.user_service.dto.UserRequest;
 import com.rs.user_service.model.User;
 import com.rs.user_service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +46,16 @@ public class UserController {
             return ResponseEntity.badRequest().body(result);
         }
         return ResponseEntity.ok(result);
+    }
+
+    @PostMapping("/authenticate")
+    public ResponseEntity<UserDto> authenticateUser(@RequestBody UserRequest userRequest){
+        try{
+            UserDto userDto = userService.authenticateUser(userRequest);
+            return ResponseEntity.ok(userDto);
+        }
+        catch (Exception e){
+            return ResponseEntity.internalServerError().build();
+        }
     }
 }
