@@ -2,6 +2,7 @@ package com.rs.show_service.controller;
 
 
 import com.rs.show_service.dto.BookSlotRequest;
+import com.rs.show_service.dto.ShowDateDto;
 import com.rs.show_service.dto.ShowRequest;
 import com.rs.show_service.model.Show;
 import com.rs.show_service.model.TimeSlot;
@@ -10,11 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/shows")
+@RequestMapping("/shows")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ShowController {
     @Autowired
     private ShowService showService;
@@ -25,6 +28,17 @@ public class ShowController {
             List<Show> shows = showService.getShows();
             return ResponseEntity.ok(shows);
         } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @PostMapping("/date")
+    public ResponseEntity<Show> getShowByDate(@RequestBody ShowDateDto date){
+        try{
+            Show show = showService.getShowByDate(date);
+            return ResponseEntity.ok(show);
+        }
+        catch (Exception e){
             return ResponseEntity.internalServerError().build();
         }
     }

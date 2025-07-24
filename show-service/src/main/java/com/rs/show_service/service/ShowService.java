@@ -1,5 +1,6 @@
 package com.rs.show_service.service;
 
+import com.rs.show_service.dto.ShowDateDto;
 import com.rs.show_service.model.Show;
 import com.rs.show_service.model.TimeSlot;
 import com.rs.show_service.repo.ShowRepo;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Time;
+import java.time.LocalDate;
 import java.util.*;
 
 @Service
@@ -26,7 +28,7 @@ public class ShowService {
             List<TimeSlot> slots = new ArrayList<>();
 
             slots.addAll(
-                    List.of(
+                    Arrays.asList(
                             new TimeSlot("06A", "06 am to 09 am"),
                             new TimeSlot("10A", "10 am to 01 pm"),
                             new TimeSlot("05P", "05 pm to 08 pm"),
@@ -48,7 +50,7 @@ public class ShowService {
     public String addSlot(Long id, String slotKey, UUID movieId){
         try{
             Optional<Show> optionalShow = showRepo.findById(id);
-            if (optionalShow.isEmpty()) {
+            if (optionalShow.isPresent()) {
                 return "Show not found";
             }
 
@@ -105,7 +107,7 @@ public class ShowService {
     public String cancelSlot(Long showId, String slotKey) {
         try {
             Optional<Show> optionalShow = showRepo.findById(showId);
-            if (optionalShow.isEmpty()) {
+            if (optionalShow.isPresent()) {
                 return "Show not found";
             }
 
@@ -152,5 +154,14 @@ public class ShowService {
             return show.get().getOccupiedSlots();
         }
         return new ArrayList<>();
+    }
+
+    @Transactional(readOnly = true)
+    public Show getShowByDate(ShowDateDto date){
+        Optional<Show> showOpt = showRepo.findByDate(date.getDate());
+        if(showOpt.isPresent()){
+            return showOpt.get();
+        }
+        throw new RuntimeException();
     }
 }

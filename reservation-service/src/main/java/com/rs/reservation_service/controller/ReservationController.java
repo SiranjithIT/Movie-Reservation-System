@@ -11,6 +11,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/reservations")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ReservationController {
     @Autowired
     private ReservationService service;
@@ -42,5 +43,16 @@ public class ReservationController {
             return ResponseEntity.badRequest().body(result);
         }
         return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/show/{id}")
+    public ResponseEntity<Reservation> getReservationByShowId(@PathVariable Long id){
+        try{
+            Reservation reservation = service.getReservationByShowId(id);
+            return ResponseEntity.ok(reservation);
+        }
+        catch (Exception e){
+            return ResponseEntity.badRequest().build();
+        }
     }
 }

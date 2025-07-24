@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -35,5 +36,13 @@ public class ReservationService {
         catch (Exception exc){
             return "Exception occurred: " + exc.getMessage();
         }
+    }
+
+    public Reservation getReservationByShowId(Long showId){
+        Optional<Reservation> resOpt = reservationRepo.findByShowId(showId);
+        if(resOpt.isPresent()){
+            return resOpt.get();
+        }
+        throw new RuntimeException();
     }
 }

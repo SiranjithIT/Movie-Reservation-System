@@ -12,7 +12,7 @@ public class Reservation {
     private UUID id;
 
     @Column(nullable = false)
-    private LocalDate date;
+    private Long showId;
 
     @Column(nullable = false)
     private String slotKey;
@@ -26,8 +26,8 @@ public class Reservation {
     public Reservation() {
     }
 
-    public Reservation(LocalDate date, String slotKey, UUID userId, String seatNum) {
-        this.date = date;
+    public Reservation(Long showId, String slotKey, UUID userId, String seatNum) {
+        this.showId = showId;
         this.slotKey = slotKey;
         this.userId = userId;
         this.seatNum = seatNum;
@@ -49,14 +49,6 @@ public class Reservation {
         this.id = id;
     }
 
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
     public String getSlotKey() {
         return slotKey;
     }
@@ -71,5 +63,13 @@ public class Reservation {
 
     public void setUserId(UUID userId) {
         this.userId = userId;
+    }
+
+    public Long getShowId() {
+        return showId;
+    }
+
+    public void setShowId(Long showId) {
+        this.showId = showId;
     }
 }
