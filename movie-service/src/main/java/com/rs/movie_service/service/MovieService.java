@@ -25,7 +25,7 @@ public class MovieService {
                 .collect(Collectors.toList());
     }
 
-    public MovieDTO getMovie(UUID id){
+    public MovieDTO getMovieById(UUID id){
         return movieRepo.findById(id)
                 .map(this::convertToDTO)
                 .orElse(null);

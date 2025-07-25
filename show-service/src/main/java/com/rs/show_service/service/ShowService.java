@@ -50,7 +50,7 @@ public class ShowService {
     public String addSlot(Long id, String slotKey, UUID movieId){
         try{
             Optional<Show> optionalShow = showRepo.findById(id);
-            if (optionalShow.isPresent()) {
+            if (!optionalShow.isPresent()) {
                 return "Show not found";
             }
 
@@ -107,7 +107,7 @@ public class ShowService {
     public String cancelSlot(Long showId, String slotKey) {
         try {
             Optional<Show> optionalShow = showRepo.findById(showId);
-            if (optionalShow.isPresent()) {
+            if (!optionalShow.isPresent()) {
                 return "Show not found";
             }
 
